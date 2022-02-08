@@ -1,5 +1,17 @@
 let player;
 let counter = 0;
+document.getElementById("gamest").disabled = true;
+let buttonDb = document.getElementById("gamest");
+buttonDb.classList.remove("gamestarter");
+buttonDb.classList.add("disabled");
+
+function inputChecker() {
+    if (document.getElementById("playerinput").value !== undefined) {
+        document.getElementById("gamest").disabled = false;
+        buttonDb.classList.remove("disabled");
+        buttonDb.classList.add("gamestarter");
+    } else {}
+}
 
 function playerInput() { player = document.getElementById("playerinput").value; }
 

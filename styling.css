@@ -17,13 +17,15 @@ body {
 .gamestarter {
     background-color: rgb(161, 148, 226);
     color: rgb(185, 228, 84);
+    padding: 1em;
     border: 0.5em solid rgb(50, 40, 100);
-    border-radius: 0.1em;
+    border-radius: 1em;
 }
 
 .disabled {
     background-color: rgb(79, 78, 88);
     color: rgb(0, 0, 0);
+    padding: 1em;
     border: 0.5em solid rgb(50, 40, 100);
-    border-radius: 0.1em;
+    border-radius: 1em;
 }
