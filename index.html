@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <input id="playerinput" type="text" oninput="inputChecker()" oninput="playerInput()" placeholder="rock, paper or scissor">
+    <input id="playerinput" type="text" oninput="playerInput(); inputChecker()" placeholder="rock, paper or scissor">
     <button id="gamest" class="gamestarter" onclick="game()">Play a Round</button>
     <p id="result"></p>
     <p id="tally"></p>
