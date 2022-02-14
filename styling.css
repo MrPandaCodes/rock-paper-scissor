@@ -11,9 +11,13 @@ html {
     background-repeat: no-repeat;
 }
 
+body {
+    position: relative;
+}
+
 *,
- ::before,
- ::after {
+::before,
+::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -22,7 +26,8 @@ html {
 
 .header {
     width: 70%;
-    margin: 2em;
+    margin-top: 2em;
+    margin-bottom: -6em;
 }
 
 .header h2 {
@@ -30,6 +35,8 @@ html {
 }
 
 .body_wrapper {
+    position: relative;
+    z-index: 0;
     display: flex;
     flex-flow: column;
     width: 100%;
@@ -44,14 +51,16 @@ html {
     justify-content: space-evenly;
     align-items: center;
     width: 100%;
-    height: 20%;
-    ;
+    height: 5em;
+    gap: 1em;
 }
 
 .game_buttons {
     background-color: rgba(155, 46, 165, 0%);
-    width: 5em;
-    height: 5em;
+    display: flex;
+    flex: 0 0 auto;
+    width: 7em;
+    height: 7em;
     border: 0.2em solid rgba(155, 46, 165, 0%);
     border-radius: 1.5em;
 }
@@ -65,13 +74,13 @@ html {
 .img_button:hover {
     border: 0 solid rgba(155, 46, 165, 0%);
     border-radius: 1.5em;
-    box-shadow: 0em 0em 1.5em 2em rgb(0, 0, 0);
+    box-shadow: 0em 0em 1.5em 2em rgba(12, 12, 12, 0.836);
 }
 
 .img_button:active {
     border: 0 solid rgba(155, 46, 165, 0%);
     border-radius: 1.5em;
-    box-shadow: 0em 0em 1.5em 3em rgba(51, 51, 71, 0.466);
+    box-shadow: 0em 0em 1.5em 1.5em rgb(0, 0, 0), 0em 0em 1.5em 2em rgb(127, 202, 221);
 }
 
 
@@ -98,10 +107,12 @@ html {
 
 .mid {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: flex-start;
     width: 70%;
-    height: 20%;
+    height: 5em;
+    margin: 0 auto;
+    gap: 2em;
 }
 
 .users {
@@ -109,26 +120,45 @@ html {
     justify-content: center;
     align-items: center;
     flex: 0 0 auto;
-    width: 5em;
-    height: 5em;
-    box-shadow: 0 0 1em 2em rgb(0, 0, 0) inset;
+    margin: 0 auto;
+    width: 7em;
+    height: 7em;
+    border-radius: 2em;
 }
 
 .users img {
-    box-shadow: 0 0 1em 2em rgb(0, 0, 0) inset;
+    border-radius: 2em;
 }
 
 .users.vs {
-    margin-top: 6%;
-    width: 2em;
-    height: 2em;
+    margin-top: 2em;
+    width: 3em;
+    height: 3em;
 }
 
 .score {
-    border: 0.2em solid rgb(218, 97, 107);
+    border: 0.2em solid rgba(0, 0, 0, 0);
+    border-radius: 2em;
+    box-shadow: 0 0 1em 1em rgb(0, 0, 0);
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+}
+
+.parent {
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+    align-self: center;
+    gap: 1em;
+    width: 100%;
+    height: 100%;
+}
+
+.score img {
     border-radius: 1.5em;
     width: 100%;
-    padding: 1.5em;
+    height: 100%;
 }
 
 .footer {
@@ -149,4 +179,41 @@ html {
 .exercise {
     color: rgb(0, 0, 0);
     text-shadow: 0 0 0.5em rgb(17, 101, 255);
+}
+
+.endscreen {
+    display: none;
+    background-color: rgb(0, 0, 0);
+    position: absolute;
+    top: 0;
+    z-index: 2;
+    animation: endani 5s linear 0s 1 reverse;
+}
+
+.finalscore {
+    position: absolute;
+    background-color: rgb(155, 46, 165);
+    width: 4em;
+    height: 2em;
+    margin: auto;
+    z-index: -2;
+    animation: score 2s linear 5.5s 1 normal forwards;
+}
+
+@keyframes score {
+    from {
+        z-index: -2;
+    }
+    to {
+        z-index: 3;
+    }
+}
+
+@keyframes endani {
+    from {
+        width: 50%;
+    }
+    to {
+        width: 0%;
+    }
 }

@@ -49,15 +49,46 @@ function scoreLister(elementId, playerType) {
 
     if (counter <= 1) {
         let div = document.createElement("div");
+        let img = document.createElement("img");
         div.id = `s${elementId}`;
         div.className = `score ${counter}`;
-        div.innerHTML = `${playerType}`;
-        document.getElementById(elementId).appendChild(div);
-    } else { document.getElementById(`s${elementId}`).innerHTML = `${playerType}`; }
+        img.id = `s${elementId}img`;
+        img.src = `/img/${playerType}.webp`
+        img.alt = "score";
+        img.style.width = "100%";
+        img.style.height = "100%";
+
+        document.getElementById(elementId).appendChild(div)
+        document.getElementById(`s${elementId}`).appendChild(img);
+    } else { document.getElementById(`s${elementId}img`).src = `/img/${playerType}.webp`; }
+}
+
+function gameEnd() {
+    let divEndL = document.createElement("div");
+    let divEndR = document.createElement("div");
+    let finalScore = document.createElement("button");
+    divEndL.id = "leftside";
+    divEndR.id = "rightside";
+    finalScore.id = "finalscore";
+    divEndL.className = "endscreen";
+    divEndR.className = "endscreen";
+    finalScore.className = "finalscore";
+    divEndL.style.height = "100%";
+    divEndR.style.height = "100%";
+    divEndL.style.width = "50%";
+    divEndR.style.width = "50%";
+    divEndL.style.left = "0";
+    divEndR.style.right = "0";
+    document.getElementsByTagName("body")[0].appendChild(divEndL);
+    document.getElementsByTagName("body")[0].appendChild(divEndR);
+    document.getElementsByTagName("body")[0].appendChild(finalScore);
+    document.getElementById("leftside").style.display = "block";
+    document.getElementById("rightside").style.display = "block";
 }
 
 function game(player) {
     counter += 1;
+
     if (playerCounter < 5 && computerCounter < 5) {
         let gameResult = rockPaS(player);
         if (gameResult == "win") {
@@ -73,31 +104,10 @@ function game(player) {
             scoreLister("player_score", playerCounter);
         };
     }
+    if (playerCounter == 5 || computerCounter == 5) {
+        gameEnd();
+        document.getElementsByTagName("button")[0].disabled = true;
+        document.getElementsByTagName("button")[1].disabled = true;
+        document.getElementsByTagName("button")[2].disabled = true;
+    };
 }
-
-
-/*
-    let div = document.createElement("div");
-    div.id = `score${counter}`;
-    div.className = `score ${counter}`;
-    
-    document.getElementById("tally").appendChild(div);
-    if (document.getElementById(`score${counter}`).innerHTML == "win") { winList.push("win"); }
-    else if (document.getElementById(`score${counter}`).innerHTML == "lose") { loseList.push("lose"); };
-    } 
-    else {
-      let finalScore = document.createElement("div");
-    finalScore.className = "finalscore";
-    document.getElementById("tally").appendChild(finalScore);
-      if (winList.length > loseList.length) {
-      finalScore.innerHTML = "YOU WON !!!";
-    } else if (winList.length < loseList.length) { finalScore.innerHTML = "CPU WON !!!"; } 
-    else { finalScore.innerHTML = "IT IS A DRAW !!!"; }
-*/
-
-/* let div = document.createElement("div");
-  div.id = `score${counter}`;
-  div.className = `score ${counter}`;
-  div.innerHTML = `${playerType}`;
-  document.getElementById(elementId).appendChild(div);
-  */
