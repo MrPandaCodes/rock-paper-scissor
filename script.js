@@ -53,14 +53,14 @@ function scoreLister(elementId, playerType) {
         div.id = `s${elementId}`;
         div.className = `score ${counter}`;
         img.id = `s${elementId}img`;
-        img.src = `img/${playerType}.webp`
+        img.src = `.img/${playerType}.webp`
         img.alt = "score";
         img.style.width = "100%";
         img.style.height = "100%";
 
         document.getElementById(elementId).appendChild(div)
         document.getElementById(`s${elementId}`).appendChild(img);
-    } else { document.getElementById(`s${elementId}img`).src = `img/${playerType}.webp`; }
+    } else { document.getElementById(`s${elementId}img`).src = `.img/${playerType}.webp`; }
 }
 
 function gameEnd() {
