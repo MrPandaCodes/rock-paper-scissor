@@ -2,6 +2,7 @@ let player;
 let counter = 0;
 let playerCounter = 0;
 let computerCounter = 0;
+let gameStatus="playing";
 let list = [];
 
 
@@ -46,6 +47,7 @@ function rockPaS(player) {
 }
 
 function scoreLister(elementId, playerType) {
+  
 
     if (counter <= 1) {
         let div = document.createElement("div");
@@ -63,51 +65,110 @@ function scoreLister(elementId, playerType) {
     } else { document.getElementById(`s${elementId}img`).src = `img/${playerType}.webp`; }
 }
 
-function gameEnd() {
+function gameEnd(gameStatus) {
+  if(gameStatus == "playing"){
     let divEndL = document.createElement("div");
     let divEndR = document.createElement("div");
     let finalScore = document.createElement("button");
+    let finalScoreImg= document.createElement("img");
     divEndL.id = "leftside";
     divEndR.id = "rightside";
     finalScore.id = "finalscore";
-    divEndL.className = "endscreen";
-    divEndR.className = "endscreen";
+    finalScoreImg.id = "finalscoreimg" 
+    divEndL.className = "endscreen left";
+    divEndR.className = "endscreen right";
     finalScore.className = "finalscore";
-    divEndL.style.height = "100%";
-    divEndR.style.height = "100%";
-    divEndL.style.width = "50%";
-    divEndR.style.width = "50%";
-    divEndL.style.left = "0";
-    divEndR.style.right = "0";
+    finalScoreImg.className = "finalscoreimg";
     document.getElementsByTagName("body")[0].appendChild(divEndL);
     document.getElementsByTagName("body")[0].appendChild(divEndR);
-    /*document.getElementsByTagName("body")[0].appendChild(finalScore);*/
+    document.getElementsByTagName("body")[0].appendChild(finalScore);
+    document.getElementById("finalscore").appendChild(finalScoreImg);
     document.getElementById("leftside").style.display = "block";
     document.getElementById("rightside").style.display = "block";
+    document.getElementsByTagName("button")[0].disabled = true;
+    document.getElementsByTagName("button")[1].disabled = true;
+    document.getElementsByTagName("button")[2].disabled = true;
+    finalscore.setAttribute("onclick","gameRes()");
+    }
+  else if ( gameStatus == "restarted"){
+    document.getElementsByTagName("button")[0].disabled = true;
+    document.getElementsByTagName("button")[1].disabled = true;
+    document.getElementsByTagName("button")[2].disabled = true;
+    document.getElementById("finalscore").className="finalscore";
+    document.getElementById("finalscoreimg").className="finalscoreimg";
+    document.getElementById("leftside").className = "endscreen left";
+    document.getElementById("rightside").className = "endscreen right";
+  };
+   
 }
 
 function game(player) {
     counter += 1;
+    
 
     if (playerCounter < 5 && computerCounter < 5) {
         let gameResult = rockPaS(player);
         if (gameResult == "win") {
             playerCounter += 1;
-            scoreLister("player_score", playerCounter);
-            scoreLister("cpu_score", computerCounter);
+          scoreLister("player_score", playerCounter);
+          scoreLister("cpu_score", computerCounter);
+          document.getElementById("splayer_score").className="score 1 win";
+          document.getElementById("scpu_score").className="score 1 lose"; 
+          setTime();
+          
         } else if (gameResult == "lose") {
             computerCounter += 1;
-            scoreLister("cpu_score", computerCounter);
-            scoreLister("player_score", playerCounter);
+          scoreLister("cpu_score", computerCounter);
+          scoreLister("player_score", playerCounter);
+          document.getElementById("scpu_score").className="score 1 win";
+          document.getElementById("splayer_score").className="score 1 lose";
+          setTime();
+                     
         } else {
-            scoreLister("cpu_score", computerCounter);
-            scoreLister("player_score", playerCounter);
+          scoreLister("cpu_score", computerCounter);
+          scoreLister("player_score", playerCounter);
+          document.getElementById("scpu_score").className="score 1 draw";
+          document.getElementById("splayer_score").className="score 1 draw";
+          setTime();
+            
         };
     }
     if (playerCounter == 5 || computerCounter == 5) {
-        gameEnd();
-        document.getElementsByTagName("button")[0].disabled = true;
-        document.getElementsByTagName("button")[1].disabled = true;
-        document.getElementsByTagName("button")[2].disabled = true;
-    };
+        gameEnd(gameStatus);
+      };
+  
+      if (playerCounter == 5){
+       document.getElementById("finalscoreimg").src = "img/win.webp";
+       document.getElementById("finalscoreimg").alt = "player win";
+       
+      }
+      else if (computerCounter == 5){
+       document.getElementById("finalscoreimg").src="img/lose.webp";
+       document.getElementById("finalscoreimg").alt="computer win";
+      };
+   
+}
+function gameRes(){
+  playerCounter=0;
+  computerCounter=0;
+  gameStatus= "restarted";
+  scoreLister("player_score", playerCounter);
+  scoreLister("cpu_score", computerCounter);
+  document.getElementById("finalscore").className="resbut";
+  document.getElementById("finalscoreimg").className="resbutimg";
+  document.getElementById("leftside").className = "restartpos left";
+  document.getElementById("rightside").className = "restartpos right";
+  document.getElementsByTagName("button")[0].disabled = false;
+  document.getElementsByTagName("button")[1].disabled = false;
+  document.getElementsByTagName("button")[2].disabled = false;
+ 
+}
+
+function scoreClassRes() {
+  document.getElementById("scpu_score").className="score 1";
+  document.getElementById("splayer_score").className="score 1";
+    
+}
+function setTime(){
+  setTimeout(scoreClassRes, 1100);
 }
